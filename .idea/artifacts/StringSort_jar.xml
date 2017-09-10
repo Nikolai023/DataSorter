@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="StringSort:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/StringSort_jar</output-path>
-    <root id="archive" name="StringSort.jar">
-      <element id="module-output" name="StringSort" />
-    </root>
-  </artifact>
-</component>
