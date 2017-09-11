@@ -28,7 +28,8 @@ public class DataSorter {
      */
     private void parseArgs(String[] args) throws IllegalArgumentException {
         if (args.length < 4) {
-            throw new IllegalArgumentException("Ошибка: недостаточно аргументов!");
+            //Ошибка: недостаточно аргументов!
+            throw new IllegalArgumentException("Error: not enough arguments!");
         }
         this.inputFileName = args[0];
         this.outputFileName = args[1];
@@ -37,14 +38,16 @@ public class DataSorter {
         } else if (args[2].equals("-s")) {
             this.isInt = false;
         } else {
-            throw new IllegalArgumentException("Ошибка: неизвестный аргумент \"" + args[2] + "\"!");
+            //Ошибка: неизвестный аргумент
+            throw new IllegalArgumentException("Error: illegal argument: \"" + args[2] + "\"!");
         }
         if (args[3].equals("-a")) {
             this.isAsc = true;
         } else if (args[3].equals("-d")) {
             this.isAsc = false;
         } else {
-            throw new IllegalArgumentException("Ошибка: неизвестный аргумент \"" + args[3] + "\"!");
+            //Ошибка: неизвестный аргумент
+            throw new IllegalArgumentException("Error: illegal argument: \"" + args[3] + "\"!");
         }
     }
 
@@ -72,7 +75,8 @@ public class DataSorter {
                     try {
                         this.list.add(Integer.parseInt(str.trim()));
                     } catch (NumberFormatException e) {
-                        throw new NumberFormatException("Ошибка: в файле не только числовые данные или число в строке слишком большое: \"" + str + "\"!");
+                        //Ошибка: в файле не только числовые данные или число в строке слишком большое!
+                        throw new NumberFormatException("Error: line contains not only numeric data or number is too large: \"" + str + "\"!");
                     }
                 } else {
                     this.list.add(str);
@@ -80,20 +84,26 @@ public class DataSorter {
             }
             reader.close();
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("Ошибка: файл не найден!");
+            //Ошибка: файл не найден!
+            throw new FileNotFoundException("Error: file not found!");
         } catch (IOException e) {
-            throw new IOException("Ошибка: ошибка чтения!");
+            //Ошибка: ошибка чтения!
+            throw new IOException("Error: read error!");
         }
 
-        if (this.list.size() == 0) {
-            throw new EOFException("Ошибка: пустой файл!");
-        }
         if (hasEmptyLines) {
-            System.out.println("Предупреждение: пустые строки были удалены.");
+            //Предупреждение: пустые строки были удалены.
+            System.out.println("Warning: empty lines will be removed.");
         }
         if (hasSpaces) {
-            System.out.println("Предупреждение: в строке содержится пробел и данные могут быть отсортированы некорректно.");
+            //Предупреждение: в строке содержится пробел и данные могут быть отсортированы некорректно.
+            System.out.println("Warning: line contains spaces and data may be sorted incorrectly.");
         }
+        if (this.list.size() == 0) {
+            //Ошибка: пустой файл!
+            throw new EOFException("Warning: file contains no sortable data.");
+        }
+
     }
 
 
@@ -135,7 +145,8 @@ public class DataSorter {
             }
             writer.write(this.list.get(this.list.size() - 1).toString());
         } catch (IOException e) {
-            throw new IOException("Ошибка: ошибка записи!");
+            //Ошибка: ошибка записи!
+            throw new IOException("Error: file write error!");
         }
     }
 
