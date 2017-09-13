@@ -91,17 +91,17 @@ public class DataSorter {
             throw new IOException("Error: read error!");
         }
 
+        if (hasSpaces) {
+            //Предупреждение: в строке содержится пробел и данные могут быть отсортированы некорректно.
+            System.out.println("Warning: line contains whitespaces and data may be sorted incorrectly. Whitespaces from the beginning and end of a line will be trimmed.");
+        }
         if (hasEmptyLines) {
             //Предупреждение: пустые строки были удалены.
             System.out.println("Warning: empty lines will be removed.");
         }
-        if (hasSpaces) {
-            //Предупреждение: в строке содержится пробел и данные могут быть отсортированы некорректно.
-            System.out.println("Warning: line contains spaces and data may be sorted incorrectly.");
-        }
         if (this.list.size() == 0) {
             //Ошибка: пустой файл!
-            throw new EOFException("Warning: file contains no sortable data.");
+            throw new EOFException("Error: file contains no sortable data.");
         }
 
     }
@@ -159,9 +159,7 @@ public class DataSorter {
      */
     private int compare(Object o1, Object o2) {
         if (this.isInt) {
-            Integer i1 = Integer.parseInt((String) o1);
-            Integer i2 = Integer.parseInt((String) o2);
-            return i1.compareTo(i2);
+            return  ((Integer) o1).compareTo((Integer) o2);
         } else {
             return ((String) o1).compareTo((String) o2);
         }
